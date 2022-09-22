@@ -5,9 +5,7 @@ n = int(input())
 link = [(i+1, int(x)) for i, x in enumerate(input().split())]
 
 def is_twist(p1, p2):
-    if (p1[0] - p2[0]) * (p1[1] - p2[1]) < 0:
-        return True
-    return False
+    return p1[1] > p2[1]
 
 def binary_search(left, right, target):
     while left < right:
