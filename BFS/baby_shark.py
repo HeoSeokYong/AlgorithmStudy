@@ -8,7 +8,7 @@ dxdy = [(-1, 0), (0, -1), (0, 1), (1, 0)]
 
 def find_food(shark, sea):
     '''
-        최소 힙을 통해 제일 작은 거리, x축, y축의 물고기 위치를 반환.
+        최소 힙을 통해 먹을 수 있는 물고기 중 가장 가까운 "거리, 위치(x축, y축)"를 반환.
     '''
     N = len(sea)
     heap = []
@@ -35,17 +35,29 @@ def find_food(shark, sea):
 
     return 0, ()
 
-def explore(sea):
+def analysis(sea):
+    '''
+        아기 상어와 물고기의 수를 반환
+    '''
     N = len(sea)
-    t, exp, num_fishes = 0, 0, 0
-    
-    # analysis sea
+    num_fishes = 0
+
     for i in range(N):
         for j in range(N):
             if sea[i][j] == BABY_SHARK:
                 shark = {'loc': (i, j), 'lev': 2}
             elif sea[i][j] != WATER:
                 num_fishes += 1
+    
+    return shark, num_fishes
+
+
+def explore(sea):
+    N = len(sea)
+    t, exp, num_fishes = 0, 0, 0
+    
+    # analysis sea
+    shark, num_fishes = analysis(sea)
 
     # explore sea
     while num_fishes:
@@ -57,6 +69,10 @@ def explore(sea):
         # call mom
         if not food:
             break
+        
+        # move & eat fish
+        shark['loc'] = food
+        num_fishes -= 1
 
         # exp up
         exp = (exp+1) % shark['lev']
@@ -65,11 +81,7 @@ def explore(sea):
         if exp == 0:
             shark['lev'] += 1 
 
-        # move & eat fish
-        shark['loc'] = food
-        num_fishes -= 1
-
-        # increase tishark
+        # increase time
         t += dist
 
     return t
