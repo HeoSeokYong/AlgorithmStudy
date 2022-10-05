@@ -14,14 +14,14 @@ def solution(N, M, maps):
         group_num: 그룹 구분을 위한 변수
         visited: 기본값 0 에서 방문시 group_num 값으로 path별 그룹 분리
         answer: path가 자기 자신으로 돌아온 경우 safe zone +1 추가,
-                다른 그룹과 만난 경우 두 그룹은 이어진 것이므로 answer 변화 없음
+                다른 그룹과 만난 경우 그 그룹의 safe zone 이용.
     '''
     answer, group_num = 0, 0
     visited = [[0] * M for _ in range(N)]
 
     for i in range(N):
         for j in range(M):
-            if visited[i][j] == -1:
+            if visited[i][j] == 0:
                 x, y = i, j
                 group_num += 1
 

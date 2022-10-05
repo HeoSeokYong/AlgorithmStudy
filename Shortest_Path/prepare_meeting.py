@@ -1,92 +1,92 @@
 # # 백준 #2610 회의 준비
-# '''
-#     Algorithm: 큐
-#     시간복잡도: O(N^2)?
+'''
+    Algorithm: 큐
+    시간복잡도: O(N^2)?
+'''
 
-# import sys
-# from collections import deque
+import sys
+from collections import deque
 
-# input = sys.stdin.readline
-# INF = 1e2
+input = sys.stdin.readline
+INF = 1e2
 
-# def friends_committee(friends):
-#     '''
-#         committees: set들의 list
-#     '''
-#     committees = []
-#     belong = [False] * (len(friends)+1)  
+def friends_committee(friends):
+    '''
+        참석자들로 위원회를 만들고 리턴
+    '''
+    committees = []
+    belong = [False] * (len(friends)+1)  
 
-#     for i in range(1, len(friends)+1):
-#         deq = deque()
-#         comm = set()
+    for i in range(1, len(friends)+1):
+        deq = deque()
+        comm = set()
 
-#         if not belong[i]:
-#             deq.append(i)
-#             belong[i] = True
+        if not belong[i]:
+            deq.append(i)
+            belong[i] = True
 
-#             while deq:
-#                 x = deq.popleft()
-#                 comm.add(x)
+            while deq:
+                x = deq.popleft()
+                comm.add(x)
 
-#                 for friend in friends[x]:
-#                     if not belong[friend]:
-#                         belong[friend] = True
-#                         deq.append(friend)
+                for friend in friends[x]:
+                    if not belong[friend]:
+                        belong[friend] = True
+                        deq.append(friend)
 
-#             committees.append(comm)
+            committees.append(comm)
 
-#     return committees
+    return committees
 
-# def elect_representative(friends, committee):
-#     '''
-#         모든 참석자들의 의사전달시간 중 최댓값이 최소가 되도록 대표를 정함
-#     '''
-#     time = INF
-#     representative = 0
+def elect_representative(friends, committee):
+    '''
+        모든 참석자들의 의사전달시간 중 최댓값이 최소가 되도록 대표를 정함
+    '''
+    time = INF
+    representative = 0
 
-#     for c in committee:
-#         cmt_dict = {cmt: [False, 0] for cmt in committee}
+    for c in committee:
+        cmt_dict = {cmt: [False, 0] for cmt in committee}
 
-#         deq = deque([(c, 0)])
-#         cmt_dict[c][0] = True
+        deq = deque([(c, 0)])
+        cmt_dict[c][0] = True
         
-#         while deq:
-#             x, t = deq.popleft()
+        while deq:
+            x, t = deq.popleft()
 
-#             for friend in friends[x]:
-#                 if not cmt_dict[friend][0]:
-#                     cmt_dict[friend][1] = t+1
-#                     cmt_dict[friend][0] = True
-#                     deq.append((friend, t+1))
+            for friend in friends[x]:
+                if not cmt_dict[friend][0]:
+                    cmt_dict[friend][1] = t+1
+                    cmt_dict[friend][0] = True
+                    deq.append((friend, t+1))
         
-#         max_comm_time = max(cmt_dict.values(), key=lambda x:x[1])[1]
-#         if time > max_comm_time:
-#             time = max_comm_time
-#             representative = c
+        max_comm_time = max(cmt_dict.values(), key=lambda x:x[1])[1]
+        if time > max_comm_time:
+            time = max_comm_time
+            representative = c
 
-#     return representative
+    return representative
 
-# def solution(friends):
-#     committees = friends_committee(friends)
+def solution(friends):
+    committees = friends_committee(friends)
+    return sorted([elect_representative(friends, committee) for committee in committees])
 
-#     return sorted([elect_representative(friends, committee) for committee in committees])
 
+if __name__ == "__main__":
+    N = int(input())
+    M = int(input())
 
-# if __name__ == "__main__":
-#     N = int(input())
-#     M = int(input())
+    friends = {i: [] for i in range(1, N+1)}
+    for _ in range(M):
+        a, b = map(int, input().split())
+        friends[a].append(b)
+        friends[b].append(a)
 
-#     friends = {i: [] for i in range(1, N+1)}
-#     for _ in range(M):
-#         a, b = map(int, input().split())
-#         friends[a].append(b)
-#         friends[b].append(a)
+    K = solution(friends)
 
-#     K = solution(friends)
-
-#     print(len(K))
-#     for k in K:
-#         print(k)
+    print(len(K))
+    for k in K:
+        print(k)
 
 ### **************************************************************
 
@@ -94,6 +94,7 @@
     Algorithm: 플로이드-워셜 
     시간복잡도: O(N^3) = 약 1,000,000 
 '''
+
 import sys
 
 input = sys.stdin.readline
@@ -118,13 +119,16 @@ def floyd_warshall(N, friends):
     return dist
 
 def friends_committee(dist):
+    '''
+        참석자들로 위원회를 만들고 리턴
+    '''
     committees = []
     belong = [False] * (len(dist))  
 
     for i in range(1, len(dist)):
         comm = []
         if not belong[i]:
-            for j in range(len(dist)):
+            for j in range(1, len(dist)):
                 if dist[i][j] != INF:
                     belong[j] = True
                     comm.append(j)
