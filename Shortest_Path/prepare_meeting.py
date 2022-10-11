@@ -2,6 +2,7 @@
 '''
     Algorithm: 큐
     시간복잡도: O(N^2)?
+    32508 KB / 132 ms
 '''
 
 import sys
@@ -93,6 +94,7 @@ if __name__ == "__main__":
 '''
     Algorithm: 플로이드-워셜 
     시간복잡도: O(N^3) = 약 1,000,000 
+    30840 KB / 228 ms
 '''
 
 import sys
@@ -155,7 +157,7 @@ def elect_representative(dist, committee):
 def solution(N, friends):
     dist = floyd_warshall(N, friends)
     committees = friends_committee(dist)
-    
+
     return sorted([elect_representative(dist, committee) for committee in committees])
 
 
