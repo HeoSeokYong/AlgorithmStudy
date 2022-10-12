@@ -10,7 +10,7 @@ direction = [(0, 0), (0, -1), (-1, -1), (-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0)
 
 def rain_dance(x):
     ''' 비바라기 마법 : 비구름을 반환'''
-    return {'loc':{(x, 0), (x, 1), (x-1, 0), (x-1, 1)}}
+    return {(x, 0), (x, 1), (x-1, 0), (x-1, 1)}
 
 def water_copy_bug(grid, loc):
     ''' 물복사 버그 마법 '''
@@ -48,7 +48,7 @@ def solution(N, M, grid, move):
         dx, dy = dx * s, dy * s
 
         ncloud = set()
-        for x, y in rain_cloud['loc']:
+        for x, y in rain_cloud:
             nx = (x + dx) % N
             ny = (y + dy) % N
 
@@ -57,7 +57,7 @@ def solution(N, M, grid, move):
         
         water_copy_bug(grid, ncloud)
 
-        rain_cloud['loc'] = form_cloud(grid, ncloud)
+        rain_cloud = form_cloud(grid, ncloud)
 
     return sum([sum(g) for g in grid])
 
