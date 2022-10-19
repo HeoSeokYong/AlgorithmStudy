@@ -106,7 +106,7 @@ def solution(N, dates):
             if stack[-1][0] == start:
                 stack.pop()
 
-            # 
+            # 전전값의 지는 날이 현재 꽃의 피는 날보다 크거나 같을 경우, 범위를 어차피 커버하므로 stack의 마지막 꽃을 pop 
             while len(stack) > 1 and stack[-2][1] >= start:
                 stack.pop()
 
