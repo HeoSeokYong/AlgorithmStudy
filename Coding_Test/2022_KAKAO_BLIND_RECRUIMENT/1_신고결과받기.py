@@ -1,3 +1,4 @@
+# 프로그래머스
 def solution(id_list, report, k):
     answer = {id: 0 for id in id_list}
     report_dict = {id: set() for id in id_list}

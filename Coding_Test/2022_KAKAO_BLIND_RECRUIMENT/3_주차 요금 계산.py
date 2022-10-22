@@ -1,3 +1,4 @@
+# 프로그래머스
 def cal_time(t1, t2):
     h1, m1 = map(int, t1.split(':'))
     h2, m2 = map(int, t2.split(':'))

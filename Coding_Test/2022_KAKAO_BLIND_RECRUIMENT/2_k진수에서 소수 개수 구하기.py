@@ -1,3 +1,4 @@
+# 프로그래머스
 def transfer_k(n, k):
     result = ''
     

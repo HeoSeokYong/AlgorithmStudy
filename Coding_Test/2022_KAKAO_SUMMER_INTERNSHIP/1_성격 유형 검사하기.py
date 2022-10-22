@@ -1,3 +1,4 @@
+# 프로그래머스
 def solution(survey, choices):
     # 왼쪽 문자는 - 오른쪽 문자는 + 점수를 더하여 계산
     score = [0] * 4

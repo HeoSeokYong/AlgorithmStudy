@@ -1,3 +1,4 @@
+# 프로그래머스
 from collections import deque
 
 def solution(queue1, queue2):
