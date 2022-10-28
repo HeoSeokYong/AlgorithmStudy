@@ -2,6 +2,7 @@
 '''
     Algorithm: Fenwick Tree 
     Time Complexity: O((logN)^2)
+    미완성(22.10.28)
 '''
 class FenwickTree:
     def __init__(self, n, k):
@@ -26,11 +27,11 @@ class FenwickTree:
         return ans
 
     def binary_search(self, l, r, data):
+        ''' l ~ r 사이 범위에서 data 값 만큼의 구간합을 가지는 인덱스 리턴 '''
         data += self.sum(self.k)
 
-        ''' l ~ r 사이 범위에서 data의 구간합을 가지는 인덱스 리턴 '''
         while l < r:
-            mid = (l+r) // 2
+            mid = (l+r) // 2 
 
             if self.sum(mid) < data:
                 l = mid + 1
@@ -51,9 +52,9 @@ class FenwickTree:
             self.recycle_bin.append(self.k)
             self.update(self.k, -1)
             self.graph[self.k-1] = 0
-            # 제일 끝 1을 삭제한 경우
+            # 마지막 행을 제거하는 경우
             if self.sum(self.k) == self.tree[-1]:
-                self.binary_search(1, len(self.tree)-1, 0)
+                self.binary_search(1, self.k, 0)
             else:
                 self.binary_search(self.k, len(self.tree)-1, 1)
 
@@ -73,12 +74,14 @@ def solution(n, k, cmd):
 
     for c in cmd:
         fenwick.command(c)
+        print(fenwick.k, fenwick.recycle_bin)
+        print(fenwick.graph)
+        print(fenwick.tree[1:])
 
     return fenwick.get_ox()
 
 if __name__ == "__main__":
-    print(solution(	8, 2, ["D 2", "C", "U 3", "C", "D 4", "C", "U 2", "Z", "Z", "U 1", "C"]))
-
+    print(solution(	8, 2, ["D 2", "C", "U 3", "C", "U 1", "C", "D 4", "C", "C", "C", "C", "Z", "Z", "D 1", "C"]))
 
 ''' 이전에 풀었던 코드 (linked list)
 from collections import deque
@@ -178,10 +181,23 @@ class linkedlist:
 
         print(a, b, self.cur.data)
 
+def solution2(n, k, cmd):
+    ll = linkedlist(0)
+    for i in range(1, n):
+        ll.append(i)
+
+    ll.set_cur(k)
+
+    for c in cmd:
+        ll.flag(c)
+        ll.printall()
+
+    return ll.ox(n)
+    
 def solution(n, k, cmd):
     answer = ''
 
-    linked_list = {i: [i - 1, i + 1] for i in range(1, n+1)} #n=8일때 1~8까지
+    linked_list = {i: [i - 1, i + 1] for i in range(1, n+1)} # n=8일때 1~8까지
     OX = ["O" for i in range(1,n+1)]
     stack = []
 
@@ -227,3 +243,4 @@ def solution(n, k, cmd):
     return "".join(OX)
 
 '''
+
