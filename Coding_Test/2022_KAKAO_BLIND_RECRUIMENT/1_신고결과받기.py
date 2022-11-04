@@ -1,4 +1,4 @@
-# 프로그래머스
+# 프로그래머스 2022 카카오 공채 #1 신고결과받기
 def solution(id_list, report, k):
     answer = {id: 0 for id in id_list}
     report_dict = {id: set() for id in id_list}

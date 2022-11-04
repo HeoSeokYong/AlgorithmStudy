@@ -1,7 +1,7 @@
 # 백준 #2342 Dance Dance Revolution
 '''
     Algorithm: dp (top-down)
-    Time complexity: 
+    Time complexity: -
 
     try 1) greedy
     - 그리디의 경우 최적해를 얻어내지 못했다. (반례: 2 1 3 2 3 0)
@@ -22,7 +22,7 @@ def solution(orders):
         if cur == 0:
             return 2
         elif abs(cur - dist) == 2: # 반대편
-            return 4
+            return 4 
         elif cur == dist: # 같은 곳
             return 1
         else: # 인접

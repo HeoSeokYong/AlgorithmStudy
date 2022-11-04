@@ -1,4 +1,4 @@
-# 프로그래머스
+# 프로그래머스 2022 카카오 채용연계형 여름 인턴십 #2 두 큐 합 같게 만들기
 from collections import deque
 
 def solution(queue1, queue2):

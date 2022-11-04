@@ -1,13 +1,46 @@
-# 프로그래머스
+# 프로그래머스 2022 카카오 공채 #5 양과 늑대
 '''
     이진 트리, 양 모으기
     해당 늑대가 막고 있는 양 
     해당 양을 얻기 위해 얻어야하는 늑대
-    <미완>
 '''
+import sys
+
+sys.setrecursionlimit(10**9)
+
 def solution(info, edges):
+    ''' dfs, 백트래킹 풀이 '''
     answer = 0
-    
+    # 트리 만들기
+    tree = {i:[] for i in range(len(info))}
+    for a, b in edges:
+        tree[a].append(b)
+
+    def dfs(node, sheep, wolf, visit):
+        nonlocal answer 
+
+        sheep += info[node] ^ 1
+        wolf += info[node]
+
+        if sheep <= wolf:
+            return
+
+        answer = max(answer, sheep)
+
+        for c in tree[node]:
+            visit.add(c)
+
+        for dist in visit:
+            dfs(dist, sheep, wolf, visit - {dist})
+            
+
+    visit = set()
+    dfs(0, 0, 0, visit)
+    print(answer)
+    return answer
+
+def solution2(info, edges):
+    ''' 1문제 계속 틀림 '''
     # 트리 만들기
     tree = {i:[] for i in range(len(info))}
     for a, b in edges:
@@ -97,6 +130,10 @@ if __name__ == "__main__":
 
     info2 = [0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0]
     edges2 = [[0, 1], [0, 2], [1, 3], [1, 4], [2, 5], [2, 6], [3, 7], [4, 8], [6, 9], [9, 10]]
-
-    solution(info, edges)
-    solution(info2, edges2)
+    
+    info3 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    edges3 = [[0, 1], [0, 2], [1, 3], [1, 4], [2, 5], [2, 6], [3, 7], [3, 8], [4, 9], [4, 10], [5, 11], [5, 12], [6, 13], [6, 14], [7, 15], [7, 16]]
+    
+    solution2(info, edges)
+    solution2(info2, edges2)
+    solution2(info3, edges3)

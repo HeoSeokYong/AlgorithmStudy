@@ -1,4 +1,4 @@
-# 프로그래머스
+# 프로그래머스 2022 카카오 공채 #3 주차 요금 계산
 def cal_time(t1, t2):
     h1, m1 = map(int, t1.split(':'))
     h2, m2 = map(int, t2.split(':'))

@@ -12,36 +12,56 @@
                i번 노드가 포함되는 서브트리의 가중치 합의 최솟값
 
 '''
+import sys
+
+INF = float('inf')
+sys.setrecursionlimit(10**6)
+
 def solution(k, num, links):
     N = len(num)
     MAX_L = sum(num)
     MIN_L = MAX_L // k
 
-    room = {i: {'num': num[i], 'child': [], 'parent': -1} for i in range(len(num))}
+    root_cand = [True] * N
 
-    for i in range(N):
-        for child in links[i]:
-            if child != -1:
-                room[i]['child'].append(child)
-                room[child]['parent'] = i
+    for l, r in links:
+        if l >= 0:
+            root_cand[l] = False
+        if r >= 0:
+            root_cand[r] = False
     
-
+    root = [i for i in range(N) if root_cand[i]][0]
 
     def check(L):
-        res = 0
-        # dp 활용
-        dp = [[0, 0] for _ in range(N)]
-
-        for i in range(N):
-            
+        dp = [None for _ in range(N)]
         
+        def traversal(x):
+            left, right = links[x]
 
+            if dp[x] != None:
+                return dp[x]
 
-        return res < k
+            dpl, dpr = [traversal(c) if c != -1 else [0, INF] for c in [left, right]]
+
+            if num[x] + dpl[1] + dpr[1] <= L:
+                dp[x] = [dpl[0] + dpr[0] - 1, num[x] + dpl[1] + dpr[1]]
+
+            elif num[x] + min(dpl[1], dpr[1]) <= L:
+                dp[x] = [dpl[0] + dpr[0], num[x] + min(dpl[1], dpr[1])]
+
+            elif num[x] <= L:
+                dp[x] = [dpl[0] + dpr[0] + 1, num[x]]
+
+            else:
+                dp[x] = [INF, INF]
+
+            return dp[x]
+        
+        return traversal(root)[0] > k
     
     def binary_search(l, r):
         while l < r:
-            mid = (l + r) // 2
+            mid = (l + r) >> 1
 
             if check(mid):
                 l = mid + 1

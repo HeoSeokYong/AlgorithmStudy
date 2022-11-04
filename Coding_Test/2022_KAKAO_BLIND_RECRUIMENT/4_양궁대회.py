@@ -1,4 +1,4 @@
-# 프로그래머스
+# 프로그래머스 2022 카카오 공채 #4 양궁대회
 import heapq
 
 def find_min(anslist):
