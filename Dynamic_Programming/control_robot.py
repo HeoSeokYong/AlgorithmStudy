@@ -1,7 +1,7 @@
 # 백준 #2169 로봇 조종하기
 '''
     Algorithm: dp
-    Time Complexity: 
+    Time Complexity: O(NM)
 
     같은 행에서 갔던 길을 돌아오는 것을 조심.
     top-down => 시간초과
