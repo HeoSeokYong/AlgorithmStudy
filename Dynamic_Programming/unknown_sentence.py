@@ -16,9 +16,7 @@ def solution(sentence, N, words):
     
     def is_same(w1, w2):
         ''' 두 문자열의 구성요소가 같은 지 확인하는 함수 '''
-        if sorted(w1) == sorted(w2):
-            return True
-        return False
+        return sorted(w1) == sorted(w2)
 
     def get_cost(w1, w2):
         ''' 해당 문자의 비용을 반환 '''
