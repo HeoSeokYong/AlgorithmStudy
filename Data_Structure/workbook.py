@@ -1,7 +1,7 @@
 # 백준 #1766 문제집
 '''
     Algorithm: 위상정렬, 최소힙
-    Time Complexity: P(NlogN + M)
+    Time Complexity: O(NlogN + M)
 
     위상 정렬과 최소힙을 사용해 적합한 문제 풀이 순서를 출력한다.
 '''

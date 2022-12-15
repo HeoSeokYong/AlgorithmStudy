@@ -1,7 +1,7 @@
 # 백준 #1484 다이어트
 '''
     Algorithm: 수학
-    Time Complexity: 
+    Time Complexity: O(sqrt(G))
 
     G = cur^2 - rem^2 = c^2 - r^2 = (c+r)(c-r)
     c,r = 곱해서 G가되는 G의 약수들의 조합일 것이다.

@@ -88,7 +88,7 @@ if __name__ == "__main__":
 #     for i in range(N-1, -1, -1):
 #         for j in range(N-1, i-1, -1):
 #             if j - i > 1 and nums[i] == nums[j] and dp[i+1][j-1]:
-#                     dp[i][j] = 1
+#                 dp[i][j] = 1
 
 #     for s, e in questions:
 #         print(dp[s-1][e-1])
