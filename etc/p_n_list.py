@@ -1,7 +1,7 @@
 # 백준 #5052 전화번호 목록
 '''
     Algorithm: 자료 구조
-    Time Complexity: O(KN) (K: 문자열의 길이)
+    Time Complexity: O(K^2N) (K: 문자열의 길이)
 
 '''
 import sys
@@ -17,7 +17,7 @@ def solution(N: int, pn_list: List[str]) -> str:
         tmp = ''
         for s in pn:
             tmp += s
-            if tmp in pn_set:
+            if tmp in pn_set: # set의 원소가 K길이의 문자열이므로 O(K)
                 return 'NO'
         pn_set.add(pn)
 
@@ -35,7 +35,7 @@ if __name__ == "__main__":
 
 '''
     Algorithm: 정렬
-    Time Complexity: O(NlogN)
+    Time Complexity: O(KNlogN)
 
     정렬을 하면 접두어가 같거나 비슷한 번호끼리 붙어 있겠다.
 '''
