@@ -16,12 +16,13 @@ input = sys.stdin.readline
 
 def solution(H: int, W: int, castle: List[List[str]]) -> int:
     result = 0
-    sand = []
+    sand = [(i, j) for i in range(H) for j in range(W) if castle[i][j] == 0] # 모래성에 영향을 주는 좌표
     dxdy = ((0, 1), (1, 0), (0, -1), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1))
 
     def wave() -> List[tuple]:
         ''' 파도가 친 후 무너질 모래성의 좌표를 반환하는 함수 '''
         fallen_castle = []
+        
         for i, j in sand:
             for di, dj in dxdy:
                 ni, nj = i + di, j + dj
@@ -32,11 +33,6 @@ def solution(H: int, W: int, castle: List[List[str]]) -> int:
                         fallen_castle.append((ni, nj))
 
         return fallen_castle
-
-    for i in range(H):
-        for j in range(W):
-            if castle[i][j] == 0:
-                sand.append((i, j))
 
     while sand := wave():
         result += 1
