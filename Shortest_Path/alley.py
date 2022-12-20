@@ -1,7 +1,7 @@
 # 백준 #1738 골목길
 '''
     Algorithm: bellman-ford
-    Time Complexity: O(NM) ?
+    Time Complexity: O(NM)
 
     음수가 포함된 최단 경로 찾기 => 벨만-포드 알고리즘
     무조건 콘도까지 가는 경로는 있는 듯 하다.
