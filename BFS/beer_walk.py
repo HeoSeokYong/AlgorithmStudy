@@ -15,7 +15,7 @@ def get_dist(x1: int, y1: int, x2: int, y2: int) -> int:
 
 def solution(N: int, loc: List[tuple]) -> str:
     targetX, targetY = loc.pop()
-    visited = [0 for _ in range(N)]
+    visited = [False for _ in range(N)]
 
     q = deque([loc.pop(0)])
 
