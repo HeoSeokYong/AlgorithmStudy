@@ -29,3 +29,30 @@ if __name__ == "__main__":
     matrix = [tuple(map(int, input().split())) for _ in range(N)]
 
     print(solution(N, matrix))
+
+# ---------------------------------------
+'''
+    Algorithm: dp
+    Time Complexity: O(N^3)
+
+    python3 통과, 문제 풀이는 위와 같고 컴파일 타임을 줄일 여러 기법을 적용.
+'''
+import sys
+input = sys.stdin.readline
+
+def solution():
+    N = int(input())
+    matrix = [list(map(int, input().split())) for _ in range(N)]
+    matrix = [x for x, _ in matrix] + [matrix[-1][1]]
+    dp = [[0 for _ in range(N)] for _ in range(N)]
+
+    for d in range(1, N):
+        for i in range(N-d):
+            j = i+d
+
+            tmp = min(ik + (matrix[i]*k*matrix[j+1]) + kj for ik, k, kj in zip(dp[i][i:j], matrix[i+1:j+1], dp[j][i+1:j+1]))
+            dp[i][j] = dp[j][i] = tmp
+
+    print(dp[0][N-1])
+
+solution()
