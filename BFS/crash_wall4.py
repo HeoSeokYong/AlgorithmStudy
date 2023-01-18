@@ -1,10 +1,9 @@
 # 백준 #16946 벽 부수고 이동하기 4
 '''
-    Algorithm: 
-    Time Complexity: 
+    Algorithm: bfs
+    Time Complexity: O(NM)
 
-    먼저 빈칸에서 bfs를 해 만나는 벽의 카운트를 늘려가는 식으로 한다.
-
+    먼저 빈칸에서 bfs를 해서 만나는 벽의 카운트를 늘려가는 식으로 한다.
 '''
 import sys
 from typing import List, Tuple, Callable
