@@ -26,10 +26,11 @@ def solution(N: int, eggs: List[List[int]]) -> int:
 
     def break_egg(x: int):
         ''' 현재 들고 있는 계란 x로 계란 깨기 '''
-        res = 0
+        nonlocal result
 
         if x == N:
-            return count_broken_egg()
+            result = max(result, count_broken_egg())
+            return 
 
         if eggs[x][0] > 0:
             flag = True
@@ -39,22 +40,21 @@ def solution(N: int, eggs: List[List[int]]) -> int:
                     eggs[x][0] -= eggs[i][1]
                     eggs[i][0] -= eggs[x][1]
 
-                    res = max(res, break_egg(x + 1))
+                    break_egg(x + 1)
 
                     eggs[x][0] += eggs[i][1]
                     eggs[i][0] += eggs[x][1]
             
             if flag:
                 # 더 이상 깰 계란이 없는 경우 end
-                return max(res, count_broken_egg())
+                result = max(result, count_broken_egg())
+                return 
 
         else:
             # 들고 있는 계란이 깨졌을 경우 오른쪽의 안 깨진 계란을 든다.
             break_egg(x + 1)
-        
-        return res
 
-    result = break_egg(0)
+    break_egg(0)
 
     return result
 
