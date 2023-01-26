@@ -59,9 +59,9 @@ def solution(N: int, board: List[List[int]]) -> int:
 
     def game(turn: int, board: List[List[int]]):
         nonlocal result
-        result = max(result, check_max_block(board))
 
         if turn == 5:
+            result = max(result, check_max_block(board))
             return
 
         for i in range(4):
