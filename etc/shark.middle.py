@@ -23,7 +23,7 @@ def read_data() -> Tuple:
 def solution(N: int, M: int, grids: List[List[int]]) -> int:
     dxdy = [(0, 1), (1, 0), (0, -1), (-1, 0)]
     
-    def find_block_group(grid: List[List[int]]):
+    def find_block_group(grid: List[List[int]]) -> Set:
         ''' bfs를 진행하고 가장 큰 블록 그룹을 반환 '''
         block_groups = []
         visited = [[False for _ in range(N)] for _ in range(N)]
@@ -60,22 +60,7 @@ def solution(N: int, M: int, grids: List[List[int]]) -> int:
 
         def find_largest_group() -> Set:
             ''' 앞의 bfs에서 찾은 group들 중 조건에 맞는 가장 큰 블록 그룹을 반환 '''
-            max_len = max(map(lambda x:len(x[0]), block_groups))
-            # 크기가 가장 큰 블록
-            cands_big = [b for b in block_groups if len(b[0]) == max_len]
-
-            # 2개 이상이라면 무지개 블록이 가장 많은 그룹
-            if len(cands_big) >= 2:
-                max_rainbow = max(map(lambda x:x[1], cands_big))
-                cands_rainbow = [c for c in cands_big if c[1] == max_rainbow]
-
-                # 2개 이상이라면 기준블록이 가장 큰 그룹
-                if len(cands_rainbow) >= 2:
-                    return max(cands_rainbow, key=lambda x:x[2])[0]
-                else:
-                    return cands_rainbow[0][0]
-            else:
-                return cands_big[0][0]
+            return max(block_groups, key=lambda x: (len(x[0]), x[1], x[2]), default=[[]])[0]
 
 
         # find block groups
@@ -85,10 +70,7 @@ def solution(N: int, M: int, grids: List[List[int]]) -> int:
                     bfs(i, j)
 
         # get largest block groups
-        if block_groups:
-            return find_largest_group()
-        else:
-            return []
+        return find_largest_group()
 
 
     def auto_play(grid: List[List[int]]) -> int:
@@ -107,7 +89,7 @@ def solution(N: int, M: int, grids: List[List[int]]) -> int:
                     if grid[i][j] >= 0: # rainbow or normal block
                         # 떨어질 위치 찾기
                         x = i
-                        while x+1 < N and grid[x+1][j] == -2:
+                        while x+1 < N and grid[x+1][j] == EMPTY:
                             x += 1
                         if x != i:
                             grid[x][j] = grid[i][j]
@@ -145,4 +127,3 @@ def solution(N: int, M: int, grids: List[List[int]]) -> int:
 
 if __name__ == "__main__":
     print(solution(*read_data()))
-
