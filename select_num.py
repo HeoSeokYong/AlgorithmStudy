@@ -26,10 +26,8 @@ def solution(N: int, M: int, A: List[int]) -> int:
     A.sort()
 
     while r < N:
-        # l과 r이 같거나 차이가 M보다 작을 경우 r을 크게 한다.
         if l == r or A[r] - A[l] < M:     
             r += 1
-        # result를 갱신하고 l을 크게 한다.
         else:
             result = min(result, A[r] - A[l])
             l += 1
