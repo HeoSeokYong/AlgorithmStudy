@@ -1,10 +1,11 @@
 # 백준 #1563 개근상
 '''
-    Algorithm: 
-    Time Complexity: 
+    Algorithm: dp
+    Time Complexity: -
 
     dp로 해보자. (n x 3 행렬)
-    
+    - bottom-up 은 도저히 못하겠다.
+    - top-down으로 하자.
 
 '''
 import sys
