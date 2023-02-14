@@ -1,7 +1,7 @@
 # 백준 #1577 도로의 개수
 '''
     Algorithm: dp
-    Time Complexity: O(N^2)
+    Time Complexity: O(NM)
 
     (0, 0) -> (N, M) 까지최단 경로로만 가기 때문에 
     x y가 증가하는 방향으로만 이동하게 된다.
