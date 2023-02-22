@@ -1,7 +1,7 @@
 # 백준 #16565 N포커
 '''
     Algorithm: brute-force, back-tracking
-    Time Complexity: 
+    Time Complexity: -
 
     가로선의 모든 경우의 수를 조사한다.
 '''
