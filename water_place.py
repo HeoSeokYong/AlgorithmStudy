@@ -1,4 +1,4 @@
-# 백준 #
+# 백준 #18513 샘터
 '''
     Algorithm: bfs
     Time Complexity: O(N + K)
