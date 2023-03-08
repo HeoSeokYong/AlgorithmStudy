@@ -1,7 +1,7 @@
 # 백준 #2252 줄 세우기
 '''
     Algorithm: 위상 정렬
-    Time Complexity: O(NM)
+    Time Complexity: O(N+M)
 '''
 import sys
 from typing import Tuple, Callable
