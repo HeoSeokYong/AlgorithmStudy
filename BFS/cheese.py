@@ -1,3 +1,5 @@
+## 2022.09.14 풀이
+
 import sys
 from collections import deque
 input = sys.stdin.readline
@@ -67,3 +69,73 @@ while True:
         break
 
 print(t)
+
+### -------------------------------------------------------------------------- ###
+## 2023.04.13 풀이 
+
+# 백준 #2638 치즈
+'''
+    Algorithm: bfs
+    Time Complexity: -
+
+'''
+
+import sys
+from typing import List, Tuple, Callable
+from collections import deque
+
+OUT_AIR, CHEESE, IN_AIR = 2, 1, 0
+
+def input() -> Callable:
+    return sys.stdin.readline().rstrip()
+
+
+def read_data() -> Tuple:
+    N, M = map(int, input().split())
+    grid = [list(map(int, input().split())) for _ in range(N)]
+    return N, M, grid
+
+
+def solution(N:int, M:int, grid:List[List[int]]) -> int:
+    hour = 0
+    dxdy = [(0, 1), (1, 0), (-1, 0), (0, -1)]
+    cheeses = {(i, j): 0 for i in range(N) for j in range(M) if grid[i][j] == CHEESE}
+
+    def air_flow(r:int, c:int):
+        # 바깥 공기
+        q = deque([(r, c)])
+        grid[r][c] = OUT_AIR
+
+        while q:
+            x, y = q.popleft()
+
+            for dx, dy in dxdy:
+                nx, ny = x + dx, y + dy
+
+                if 0 <= nx < N and 0 <= ny < M:
+                    if grid[nx][ny] == IN_AIR:
+                        grid[nx][ny] = OUT_AIR
+                        q.append((nx, ny))
+                    elif grid[nx][ny] == CHEESE:
+                        cheeses[(nx, ny)] += 1
+    # main
+    air_flow(0, 0)
+
+    while cheeses:
+        melted = []
+
+        for x, y in cheeses:
+            if cheeses[(x, y)] >= 2:
+                melted.append((x, y))
+        
+        for x, y in melted:
+            del cheeses[(x, y)]
+            air_flow(x, y)
+    
+        hour += 1
+
+    return hour
+
+
+if __name__ == "__main__":
+    print(solution(*read_data()))
