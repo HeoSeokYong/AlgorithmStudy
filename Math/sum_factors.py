@@ -1,7 +1,7 @@
 # 백준 #17425 약수의 합
 '''
     Algorithm: math, 누적합
-    Time Complexity: O(NlogN)
+    Time Complexity: O(NlnN)
 
 '''
 import sys
