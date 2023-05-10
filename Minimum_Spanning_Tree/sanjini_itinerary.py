@@ -1,4 +1,4 @@
-# 백준 #28019 산지니의 여행계획
+# 백준 #28019 산지니의 여행계획 (푸는 중...)
 '''
     Algorithm: MST(max) - prim, dfs
     Time Complexity: 
