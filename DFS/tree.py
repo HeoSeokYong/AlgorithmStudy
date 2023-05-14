@@ -34,6 +34,9 @@ def solution(N:int, parents:List[int], del_node:int) -> int:
     while stack:
         node = stack.pop()
 
+        if node == del_node:
+            continue
+
         if not tree[node]:
             result += 1
 
